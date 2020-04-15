@@ -51,6 +51,18 @@ const lib = {
             else
                 callback(err);
         })
+    },
+    list: (dir,callback) => {
+        fs.readdir(`${lib.baseDir}${dir}/`,(err,files) => {
+            let checkId = [];
+            if(!err && files && files.length > 0){
+                files.forEach((file) => {
+                    checkId.push(file.replace('.json',''));
+                });
+                callback(false,checkId);
+            }else
+                callback(err,files);
+        });
     }
 };
 
